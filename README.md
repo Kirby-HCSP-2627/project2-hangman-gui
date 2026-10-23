@@ -26,10 +26,11 @@ A graphical user interface or GUI for short, can be defined as a visual system t
 ### The Program
 Using pygame, you will be creating a GUI for the logic you have already implemented. I suggest importing your file with your game logic and the template also has a line that will help you with doing that. You will be able to call all of the functions that you defined in your game logic file.<br/>
 
-This will also be a test of how well you applied abstraction in your previous assignment. Don't worry if you find yourself having to write some extra functions to make your old code work in this project. The main point is for your code to be simple and concise. Most of the time, your functions should only do one single thing! <br/>
+This will also be a test of how well you applied abstraction in your previous assignment. Don't worry if you find yourself having to write some extra functions to reuse your old code. Just remember the main point for your code is to be simple and concise. Most of the time, your functions should only do one single thing! <br/>
 
 You will have the liberty to choose how to implement most of it but there are a couple things you must have:
-*  
+- You will import the words from a text file
+  - The 
 
 ### Example Output
 ```python
@@ -54,4 +55,4 @@ git commit -m "your message here"
 ```bash
 git push
 ```
-5. Confirm on your GitHub account, might take ~1 or 2 minutes to update on GitHub website
+5. Confirm on your GitHub account
