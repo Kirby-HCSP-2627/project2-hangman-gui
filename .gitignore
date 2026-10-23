@@ -1,0 +1,15 @@
+# Python virtual environments
+.venv/
+venv/
+ENV/
+
+# VS Code internals (ignoring user state, keeping configurations)
+.vscode/.DS_Store
+.vscode/launch.json
+
+# Python caching and logs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
