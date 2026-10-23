@@ -39,8 +39,18 @@ You will have the liberty to choose how to implement most of it but there are a 
   - Print out player score at the end of a successful game
 In summary, the mechanics of the game should stay the same. 
 - So what will change?
-  - Your program must have a visual way for 
-
+  - Have a visual for the remaining letters
+  - Have a visual for their current progress on the word ( _ pp_ _ e )
+  - Have a visual for the user to know how many guesses are left.
+    - You will do this by having an unique image for each stage
+    - Traditionally, this would look like drawing each part of the hangman but you can take it any direction as long as there is a unique image for each of the 6 stages (Ex. Building a snowman in 6 stages)
+  - Give the user an option to guess the word early
+    - If the user guesses correctly, multiply the player score by the amount of guesses left as a bonus
+    - If the user guesses incorrectly, they lose
+  - Have a game win and game loss screen
+    - On game win, show the players their score
+    - On game loss, show the players the word
+    - In both, have a way for the user to choose to play again
 ### Example Output
 ```python
 >>> secret_word = 'apple'
