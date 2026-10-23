@@ -1,5 +1,6 @@
 # Example file showing a basic pygame "game loop"
 import pygame
+# import your_file_name_here # Replace this with the name of your python file that has all of your logic
 
 # pygame setup
 pygame.init()
