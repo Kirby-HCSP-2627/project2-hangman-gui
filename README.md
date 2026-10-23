@@ -1,4 +1,4 @@
-# Assignment #3 Hangman
+# Project #2 Hangman GUI
 
 ### INSTALL
 Run each line individually <br/>
@@ -17,43 +17,22 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 ### Intro
-This assignment is for you to practice functions, I/O, and flow control. 
+We are going to use [pygame](https://www.pygame.org/docs/), a python library built to make 2D games using python. <br/>
 
-### Relevant Info 
-In general, when taking user input there are a few things we want to check: <br/>
-1. Check the user input is what you want
-2. Clean up the user input, remove extra blank spaces and convert to all lowercase
+Compared to our last library, you will notice that pygame is a little more established with plenty of guides. My best advice is to look at the documentation and various examples the site provides. If you decide to go into programming, this is something you will be doing a lot! <br/>
 
+A graphical user interface or GUI for short, can be defined as a visual system that enables users to interact with machines. You are looking at one right now. Whether it is on MacOS, any version of Windows, or even your phone, you are currently interacting with a GUI. GUI's allow users to give commands to computers through clicks or touch rather than the use of commands. Without them users would have to interact with computers solely through the command line. 
 
-These might be some useful methods/functions. Google them to find the documentation
-```python
-isalpha()
-string.strip() 
-```
 ### The Program
-You will implement a variation of the classic word game Hangman. If you are unfamiliar with the rules of the game, [read here](http://en.wikipedia.org/wiki/Hangman_(game)) . Don’t be intimidated by this problem it's actually easier than it looks! I will 'scaffold' this problem, guiding you through the creation of helper functions 
-before you implement the actual game.
+Using pygame, you will be creating a GUI for the logic you have already implemented. You will have the liberty to choose how to implement most of it but there are a couple things you must have:
+*	
 
 ### Example Output
-Example for is_word_guessed() helper function
 ```python
 >>> secret_word = 'apple'
 >>> letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
 >>> print(is_word_guessed(secret_word, letters_guessed))
 False
-```
-Example for get_guessed_word()
-```python
->>> secret_word = 'apple'
->>> letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
->>> print(get_guessed_word(secret_word, letters_guessed))
-'_ pp_ e'
-```
-Example for get_available_letters()
-```python
->>> letters_guessed = ['e', 'i', 'k', 'p', 'r', 's']
->>> print(get_available_letters(letters_guessed))
-abcdfghjlmnoqtuvwxyz # The alphabet with the letters guessed removed 
 ```
 
 ### Submitting 
