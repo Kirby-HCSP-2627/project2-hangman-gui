@@ -29,8 +29,17 @@ Using pygame, you will be creating a GUI for the logic you have already implemen
 This will also be a test of how well you applied abstraction in your previous assignment. Don't worry if you find yourself having to write some extra functions to reuse your old code. Just remember the main point for your code is to be simple and concise. Most of the time, your functions should only do one single thing! <br/>
 
 You will have the liberty to choose how to implement most of it but there are a couple things you must have:
-- You will import the words from a text file
-  - The 
+- You will import the words from a text file.
+  - There are 2 different files that your program must read from
+    - words.txt is the same file from the last assignment. A text file comprised of words separated by spaces. (required)
+    - phrases.txt is a new file of phrases, each on their own line. The phrases are up to 4 words long. (optional, extra challenge)
+- The rules will stay the same.
+  - 6 total guesses
+  - 3 warnings, get warnings for non-alphabetical characters and repeat guesses, start losing a guess after they run out of warnings
+  - Print out player score at the end of a successful game
+In summary, the mechanics of the game should stay the same. 
+- So what will change?
+  - Your program must have a visual way for 
 
 ### Example Output
 ```python
