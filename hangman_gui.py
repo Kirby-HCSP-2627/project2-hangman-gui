@@ -4,12 +4,13 @@ import pygame
 
 # pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720)) # You can change this depending on the size of your screen 
+screen = pygame.display.set_mode((1280, 720)) # You can change this depending on the size of the window you want the game to appear as
 clock = pygame.time.Clock()
 running = True
 
 while running:
     # poll for events
+    # here is where you will put all of your events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
