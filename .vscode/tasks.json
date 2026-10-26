@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup Python Environment",
+      "type": "shell",
+      "windows": {
+        "command": "py -3.12 -m venv .venv && .venv\\Scripts\\activate.bat && python -m pip install --upgrade pip && pip install -r requirements.txt"
+      },
+      "osx": {
+        "command": "python3.12 -m venv .venv && source .venv/bin/activate && python3 -m pip install --upgrade pip && pip install -r requirements.txt"
+      },
+      "linux": {
+        "command": "python3.12 -m venv .venv && source .venv/bin/activate && python3 -m pip install --upgrade pip && pip install -r requirements.txt"
+      },
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
+}
