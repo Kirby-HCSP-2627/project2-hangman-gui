@@ -17,7 +17,8 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 ### Intro
-We are going to use [pygame](https://www.pygame.org/docs/), a python library built to make 2D games using python. <br/>
+We are going to use [pygame](https://pyga.me/docs/), a python library built to make 2D games using python. <br/>
+I find that tutorials section again to be really useful. <br/>
 
 Compared to our last library, you will notice that pygame is a little more established with plenty of guides. My best advice is to look at the documentation and various examples the site provides. If you decide to go into programming, this is something you will be doing a lot! <br/>
 
