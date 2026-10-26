@@ -1,21 +1,7 @@
 # Project #2 Hangman GUI
 
 ### INSTALL
-Run each line individually <br/>
-For MAC
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-For WINDOWS
-```bash
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
+I have added an auto-install. All you have to do is accept the run tasks notification. Let me know if anything goes wrong. 
 ### Intro
 We are going to use [pygame](https://pyga.me/docs/), a python library built to make 2D games using python. <br/>
 I find that tutorials section again to be really useful. <br/>
