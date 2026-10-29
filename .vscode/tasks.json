@@ -2,16 +2,16 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Setup Python Environment",
+      "label": "Setup Portable Python Environment",
       "type": "shell",
       "windows": {
-        "command": "py -3.12 -m venv .venv && .venv\\Scripts\\activate.bat && python -m pip install --upgrade pip && pip install -r requirements.txt"
+        "command": "powershell -ExecutionPolicy Bypass -File setup.ps1"
       },
       "osx": {
-        "command": "python3.12 -m venv .venv && source .venv/bin/activate && python3 -m pip install --upgrade pip && pip install -r requirements.txt"
+        "command": "bash setup.sh"
       },
       "linux": {
-        "command": "python3.12 -m venv .venv && source .venv/bin/activate && python3 -m pip install --upgrade pip && pip install -r requirements.txt"
+        "command": "bash setup.sh"
       },
       "group": "none",
       "presentation": {
