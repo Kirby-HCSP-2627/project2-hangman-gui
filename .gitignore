@@ -6,6 +6,7 @@ ENV/
 # VS Code internals (ignoring user state, keeping configurations)
 .vscode/.DS_Store
 .vscode/launch.json
+.python/
 
 # Python caching and logs
 __pycache__/
