@@ -3,13 +3,16 @@ import pygame
 
 pygame.init()
 # Initialize your settings, I suggest setting your colors, fonts, and window sizes
-screen = pygame.display.set_mode(1280,720, pygame.SCALED)
+screen = pygame.display.set_mode((1280,720), pygame.SCALED)
 pygame.display.set_caption("Insert your name here") # Name your window
+font = pygame.font.Font(None, 36)
+clock = pygame.time.Clock()
+running = True
 
 # Lets create a background
 background = pygame.Surface(screen.get_size())
 background = background.convert()
-background.fill(background_color) # Fills background with color you defined
+background.fill("purple") # Fills background with color you defined
 
 # Let's add a title
 title = font.render("This text is centered and using color (0,0,0)", True, (0,0,0))
@@ -38,7 +41,7 @@ while running:
 
 
 
-    screen.fill("purple")  # Fill the display with a solid color to start on a fresh screen
+    #screen.fill("purple")  # Fill the display with a solid color to start on a fresh screen
     # 3. Render any new visuals here
     
     
