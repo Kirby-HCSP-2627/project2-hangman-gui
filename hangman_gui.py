@@ -1,5 +1,5 @@
 import pygame
-# import your python files here by 
+# import your python files here
 
 pygame.init()
 # Initialize your settings, I suggest setting your colors, fonts, and window sizes
