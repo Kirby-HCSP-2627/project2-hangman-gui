@@ -16,12 +16,22 @@ background.fill("purple") # Fills background with color you defined
 
 # Let's add a title
 title = font.render("This text is centered and using color (0,0,0)", True, (0,0,0))
-textpos = title.get_rect(centerx=background.get_width() / 2, y=10)
+text_pos = title.get_rect(centerx=background.get_width() / 2, y=10)
 # Think of blit as a copy and paste. Here we copy the rectangle from line above onto the background
-background.blit(title, textpos)
+background.blit(title, text_pos)
+
+# Let's add a text box
+# Rectangle objects take ((x,y), (width,height))
+# The origin (0,0), is the top left most pixel on screen
+# So passing (100,200) would create a Rectangle object with position (100,100) going 100 wide and 100 down
+text_rectangle = pygame.Rect((100,200), (100,200))
+# Syntax: font.render(text, antialias, color)
+text_surface = font.render("Put your message here", True, (255, 255, 255))
+text_rect = text_surface.get_rect(center=text_rectangle.center)
 
 # Finally let's update our screen 
 screen.blit(background, (0, 0))
+screen.blit(text_surface, text_rectangle)
 pygame.display.flip()
 while running:
     # 1. Process game events first
@@ -36,11 +46,8 @@ while running:
 
     #screen.fill("purple")  # Fill the display with a solid color to start on a fresh screen
     # 3. Render any new visuals here
-    # Rectangle objects take ((x,y), (width,height))
-    # The origin (0,0), is the top left most pixel on screen
-    # So passing (100,200) would create a Rectangle object with position (100,100) going 100 wide and 100 down
-    button1_rectangle = pygame.Rect((100,200), (100,200))
-    pygame.draw.rect(screen, (255,255,255), button1_rectangle)
+    
+
     
     
     
