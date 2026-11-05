@@ -20,13 +20,6 @@ textpos = title.get_rect(centerx=background.get_width() / 2, y=10)
 # Think of blit as a copy and paste. Here we copy the rectangle from line above onto the background
 background.blit(title, textpos)
 
-# Rectangle objects take ((x,y), (width,height))
-# The origin (0,0), is the top left most pixel on screen
-# So passing (100,200) would create a Rectangle object with position (100,100) going 100 wide and 100 down
-button1_rectangle = pygame.Rect((100,200), (100,200))
-pygame.draw.rect(screen, (255,255,255), button1_rectangle)
-
-
 # Finally let's update our screen 
 screen.blit(background, (0, 0))
 pygame.display.flip()
@@ -43,6 +36,11 @@ while running:
 
     #screen.fill("purple")  # Fill the display with a solid color to start on a fresh screen
     # 3. Render any new visuals here
+    # Rectangle objects take ((x,y), (width,height))
+    # The origin (0,0), is the top left most pixel on screen
+    # So passing (100,200) would create a Rectangle object with position (100,100) going 100 wide and 100 down
+    button1_rectangle = pygame.Rect((100,200), (100,200))
+    pygame.draw.rect(screen, (255,255,255), button1_rectangle)
     
     
     
