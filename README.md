@@ -37,11 +37,11 @@ In summary, the mechanics of the game should stay the same.
   - Have a game win and game loss screen
     - On game win, show the players their score
     - On game loss, show the players the word
-    - In both, have a way for the user to choose to play again
 #### OPTIONAL THINGS TO IMPLEMENT
 Add some audio cues or background music. 
 - Use .wav or .ogg file types for short and quick sound effects. There are pros and cons for both. 
-- Use .mp3 for background music. 
+- Use .mp3 for background music.
+Have a way for the user to choose to play again. 
 
 ### Example Output
 Coming Soon
