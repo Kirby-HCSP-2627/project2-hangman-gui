@@ -112,6 +112,7 @@ def hangman(secret_word: str) -> None:
     return None
 
 # if statment below will only run if we directly run this file
+# This is to avoid the game from running if we import this file 
 if __name__ == "__main__":
     secret_word = get_word("word_list.txt")
     if secret_word != "":
