@@ -19,12 +19,12 @@ I have also included my own implementation of the hangman logic. You may use tha
 
 You will have the liberty to choose how to implement most of it but there are a couple things you must have:
 - You will import the words from a text file.
-  - There are 2 different files that your program must read from
+  - There are 2 different files that your program may read from
     - words.txt is the same file from the last assignment. A text file comprised of words separated by spaces. (required)
     - phrases.txt is a new file of phrases, each on their own line. The phrases are up to 4 words long. (optional, extra challenge)
 - The rules will stay the same.
   - 6 total guesses
-  - 3 warnings, get warnings for non-alphabetical characters and repeat guesses, start losing a guess after they run out of warnings
+  - 3 warnings, get warnings for repeat guesses, start losing a guess after they run out of warnings
   - Print out player score at the end of a successful game
 In summary, the mechanics of the game should stay the same. 
 - So what will change?
