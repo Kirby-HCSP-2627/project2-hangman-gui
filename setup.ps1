@@ -3,16 +3,17 @@ $ErrorActionPreference = "Stop"
 # 1. Set Windows paths and environment variables
 $Platform = "win"
 $Archive = "tools\python312-win.zip"
-$TargetDir = ".python\win"
-$BasePython = "$TargetDir\python.exe"
-$VenvDir = ".venv-hangman"
-$VenvPython = "$VenvDir\Scripts\python.exe"
+$TargetDir = Join-Path $PSScriptRoot ".python\win"
+$BasePython = Join-Path $TargetDir "python.exe"
+$VenvDir = Join-Path $PSScriptRoot ".venv-hangman"
+$VenvPython = Join-Path $VenvDir "Scripts\python.exe"
 
 Write-Host "Detected Platform: $Platform"
 
 # 2. Extract Portable Python base bundle if missing
 if (-not (Test-Path -Path $BasePython)) {
-    if (-not (Test-Path -Path $Archive)) {
+    $ArchivePath = Join-Path $PSScriptRoot $Archive
+    if (-not (Test-Path -Path $ArchivePath)) {
         Write-Error "Error: Missing required bundle file '$Archive' in tools/"
         exit 1
     }
@@ -23,8 +24,8 @@ if (-not (Test-Path -Path $BasePython)) {
     }
     New-Item -ItemType Directory -Force -Path $TargetDir | Out-Null
 
-    # Native extraction (eliminates reliance on missing 'unzip' binaries)
-    Expand-Archive -Path $Archive -DestinationPath $TargetDir -Force
+    # Native extraction
+    Expand-Archive -Path $ArchivePath -DestinationPath $TargetDir -Force
 
     # Handle nested subfolder extraction if the ZIP contained a top-level directory
     $subDirs = Get-ChildItem -Path $TargetDir -Directory
@@ -50,6 +51,6 @@ if (-not (Test-Path -Path $VenvDir)) {
 # 4. Install requirements into the custom venv
 Write-Host "Installing dependencies into $VenvDir..."
 & "$VenvPython" -m pip install --upgrade pip
-& "$VenvPython" -m pip install -r requirements.txt
+& "$VenvPython" -m pip install -r (Join-Path $PSScriptRoot "requirements.txt")
 
 Write-Host "Setup completed successfully! Virtual environment is ready at $VenvDir"
