@@ -15,6 +15,8 @@ Using pygame, you will be creating a GUI for the logic you have already implemen
 
 This will also be a test of how well you applied abstraction in your previous assignment. Don't worry if you find yourself having to write some extra functions to reuse your old code. Just remember the main point for your code is to be simple and concise. Most of the time, your functions should only do one single thing! <br/>
 
+I have also included my own implementation of the hangman logic. You may use that as well if you'd like! 
+
 You will have the liberty to choose how to implement most of it but there are a couple things you must have:
 - You will import the words from a text file.
   - There are 2 different files that your program must read from
