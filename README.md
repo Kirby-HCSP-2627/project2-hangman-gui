@@ -46,7 +46,7 @@ Add some audio cues or background music.
 Have a way for the user to choose to play again. 
 
 ### Example Output
-Coming Soon
+https://github.com/user-attachments/assets/1aa07f25-8380-4bc3-b3e4-4d6b66c631aa
 
 ### Submitting 
 To submit your project:<br/>
