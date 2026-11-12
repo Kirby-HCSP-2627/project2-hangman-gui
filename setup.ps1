@@ -1,56 +1,78 @@
 $ErrorActionPreference = "Stop"
 
-# 1. Set Windows paths and environment variables
-$Platform = "win"
-$Archive = "tools\python312-win.zip"
-$TargetDir = Join-Path $PSScriptRoot ".python\win"
-$BasePython = Join-Path $TargetDir "python.exe"
-$VenvDir = Join-Path $PSScriptRoot ".venv-hangman"
+# 1. Configuration & Architecture Detection
+$PythonVersion = "3.12.8"
+$Arch = if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64") { "pythonarm64" } else { "python" }
+$NuGetUrl = "https://www.nuget.org/api/v2/package/$Arch/$PythonVersion"
+
+# Resolve workspace root (handles running from root or .vscode/)
+$WorkspaceRoot = if ((Split-Path $PSScriptRoot -Leaf) -eq ".vscode") {
+    Split-Path $PSScriptRoot -Parent
+} else {
+    $PSScriptRoot
+}
+
+$TargetDir  = Join-Path $WorkspaceRoot ".python\win"
+$BasePython = Join-Path $TargetDir "tools\python.exe"
+$VenvDir    = Join-Path $WorkspaceRoot ".venv-hangman"
 $VenvPython = Join-Path $VenvDir "Scripts\python.exe"
+$TempZip    = Join-Path $env:TEMP "python-$PythonVersion-$Arch.zip"
 
-Write-Host "Detected Platform: $Platform"
+Write-Host "Setting up Python $PythonVersion ($Arch) in $WorkspaceRoot..."
 
-# 2. Extract Portable Python base bundle if missing
+# 2. Download & Extract Full Portable Python (via Official NuGet Package)
 if (-not (Test-Path -Path $BasePython)) {
-    $ArchivePath = Join-Path $PSScriptRoot $Archive
-    if (-not (Test-Path -Path $ArchivePath)) {
-        Write-Error "Error: Missing required bundle file '$Archive' in tools/"
-        exit 1
-    }
+    Write-Host "Downloading official Python $PythonVersion package..."
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    Invoke-WebRequest -Uri $NuGetUrl -OutFile $TempZip -UseBasicParsing
 
-    Write-Host "Extracting $Archive into $TargetDir..."
+    Write-Host "Extracting Python to $TargetDir..."
     if (Test-Path -Path $TargetDir) {
         Remove-Item -Recurse -Force -Path $TargetDir
     }
     New-Item -ItemType Directory -Force -Path $TargetDir | Out-Null
 
-    # Native extraction
-    Expand-Archive -Path $ArchivePath -DestinationPath $TargetDir -Force
-
-    # Handle nested subfolder extraction if the ZIP contained a top-level directory
-    $subDirs = Get-ChildItem -Path $TargetDir -Directory
-    if ($subDirs.Count -eq 1 -and -not (Test-Path -Path $BasePython)) {
-        $nestedPath = $subDirs[0].FullName
-        Get-ChildItem -Path $nestedPath | Move-Item -Destination $TargetDir -Force
-        Remove-Item -Recurse -Force -Path $nestedPath
-    }
-
-    # Enable site-packages if using standard Windows embeddable Python distribution
-    $pthFile = Get-ChildItem -Path $TargetDir -Filter "*._pth" | Select-Object -First 1
-    if ($pthFile) {
-        (Get-Content $pthFile.FullName) -replace '#\s*import site', 'import site' | Set-Content $pthFile.FullName
-    }
+    Expand-Archive -Path $TempZip -DestinationPath $TargetDir -Force
+    Remove-Item -Force -Path $TempZip -ErrorAction SilentlyContinue
 }
 
-# 3. Create Custom Virtual Environment (.venv-hangman)
-if (-not (Test-Path -Path $VenvDir)) {
+# 3. Create Virtual Environment (.venv-hangman)
+if (-not (Test-Path -Path $VenvPython)) {
     Write-Host "Creating virtual environment in $VenvDir..."
     & "$BasePython" -m venv "$VenvDir"
 }
 
-# 4. Install requirements into the custom venv
-Write-Host "Installing dependencies into $VenvDir..."
-& "$VenvPython" -m pip install --upgrade pip
-& "$VenvPython" -m pip install -r (Join-Path $PSScriptRoot "requirements.txt")
+# 4. Install Dependencies
+Write-Host "Upgrading pip and installing dependencies..."
+& "$VenvPython" -m pip install --upgrade pip --quiet
 
-Write-Host "Setup completed successfully! Virtual environment is ready at $VenvDir"
+$ReqFile = Join-Path $WorkspaceRoot "requirements.txt"
+if (Test-Path -Path $ReqFile) {
+    & "$VenvPython" -m pip install -r "$ReqFile"
+} else {
+    Write-Warning "No requirements.txt found at $ReqFile; skipping package installation."
+}
+
+# 5. Configure VS Code to Automatically Use This Virtual Environment
+$VsCodeDir    = Join-Path $WorkspaceRoot ".vscode"
+$SettingsFile = Join-Path $VsCodeDir "settings.json"
+New-Item -ItemType Directory -Force -Path $VsCodeDir | Out-Null
+
+$Settings = @{}
+if (Test-Path -Path $SettingsFile) {
+    try {
+        $Parsed = Get-Content $SettingsFile -Raw | ConvertFrom-Json
+        if ($Parsed) {
+            $Parsed.PSObject.Properties | ForEach-Object { $Settings[$_.Name] = $_.Value }
+        }
+    } catch {
+        Write-Warning "Existing settings.json could not be parsed; overwriting with clean settings."
+    }
+}
+
+$Settings["python.defaultInterpreterPath"] = '${workspaceFolder}/.venv-hangman/Scripts/python.exe'
+$Settings["python.terminal.activateEnvironment"] = $true
+
+$Settings | ConvertTo-Json -Depth 10 | Set-Content -Path $SettingsFile -Encoding UTF8
+
+Write-Host "`nSetup complete! Virtual environment configured for VS Code at $VenvDir" -ForegroundColor Green
