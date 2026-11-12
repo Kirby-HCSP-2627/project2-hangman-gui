@@ -11,19 +11,19 @@
           "-ExecutionPolicy",
           "Bypass",
           "-File",
-          "${workspaceFolder}/setup.ps1"
+          "${workspaceFolder}/.vscode/setup.ps1"
         ]
       },
       "osx": {
         "command": "bash",
         "args": [
-          "${workspaceFolder}/setup.sh"
+          "${workspaceFolder}/.vscode/setup.sh"
         ]
       },
       "linux": {
         "command": "bash",
         "args": [
-          "${workspaceFolder}/setup.sh"
+          "${workspaceFolder}/.vscode/setup.sh"
         ]
       },
       "presentation": {
